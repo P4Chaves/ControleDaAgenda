@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Login - Caça-Casos RJ{% endblock %}
+{% block content %}
+    <h2>Login para Advogados/Admins</h2>
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+        
+        <button type="submit">Entrar</button>
+    </form>
+    <p>Não tem conta? <a href="{{ url_for('register') }}">Registre-se</a></p>
+{% endblock %}

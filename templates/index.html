@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h2>Relate seu Problema como Consumidor</h2>
+        <p>Descreva sua questão com concessionárias (água, luz, telefone) ou marketplaces. Nossa equipe de advogados especializados em Direito do Consumidor analisará seu caso gratuitamente.</p>
+        <form action="{{ url_for('submit_lead') }}" method="post">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" required>
+            
+            <label for="email">Email ou Telefone (para contato):</label>
+            <input type="text" id="email" name="email" required>
+            
+            <label for="categoria">Categoria do Problema:</label>
+            <select id="categoria" name="categoria" required>
+                <option value="">Selecione uma opção</option>
+                <option value="Água">Problemas com Água (ex: corte indevido)</option>
+                <option value="Eletricidade">Problemas com Eletricidade (ex: cobrança abusiva)</option>
+                <option value="Telefone">Problemas com Telefone/Internet (ex: falta de serviço)</option>
+                <option value="Marketplace">Problemas com Marketplaces (ex: produto defeituoso)</option>
+            </select>
+            
+            <label for="descricao">Descrição Detalhada:</label>
+            <textarea id="descricao" name="descricao" rows="5" placeholder="Explique o ocorrido, datas e valores envolvidos." required></textarea>
+            
+            <label class="checkbox-wrap">
+                <input type="checkbox" id="consent" name="consent" required>
+                Eu concordo com o tratamento dos meus dados conforme a LGPD e autorizo o contato para análise do caso.
+            </label>
+            <button type="submit">Enviar Relato e Aguardar Contato</button>
+        </form>
+    </section>
+{% endblock %}

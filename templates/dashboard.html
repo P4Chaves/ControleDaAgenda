@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Caça-Casos RJ{% endblock %}
+{% block content %}
+    <h2>Dashboard de Leads</h2>
+    <p><strong>Total de Leads:</strong> {{ leads | length }}</p>
+    <form method="get">
+        <label for="categoria">Filtrar por Categoria:</label>
+        <select id="categoria" name="categoria" onchange="this.form.submit()">
+            <option value="" {% if not request.args.get('categoria') %}selected{% endif %}>Todos</option>
+            <option value="Água" {% if request.args.get('categoria') == 'Água' %}selected{% endif %}>Água</option>
+            <option value="Eletricidade" {% if request.args.get('categoria') == 'Eletricidade' %}selected{% endif %}>Eletricidade</option>
+            <option value="Telefone" {% if request.args.get('categoria') == 'Telefone' %}selected{% endif %}>Telefone</option>
+            <option value="Marketplace" {% if request.args.get('categoria') == 'Marketplace' %}selected{% endif %}>Marketplace</option>
+        </select>
+    </form>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email/Telefone</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lead in leads %}
+            <tr>
+                <td>{{ lead.id }}</td>
+                <td>{{ lead.nome }}</td>
+                <td>{{ lead.email }}</td>
+                <td>{{ lead.categoria }}</td>
+                <td>{{ lead.descricao_problema[:50] }}...</td>  <!-- Resumo curto -->
+                <td>{{ lead.data.strftime('%d/%m/%Y %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p><a href="{{ url_for('export_csv') }}">Exportar para CSV</a> (implemente JS para download se necessário)</p>
+{% endblock %}
